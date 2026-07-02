@@ -1,0 +1,37 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Build artifacts (PyInstaller / packaging)
+build/
+dist/
+*.spec
+*.dmg
+*.app/
+
+# Playwright artifacts
+playwright-artifacts/
+playwright-report/
+test-results/
+
+# Logs and runtime files
+*.log
+*.pid
+
+# macOS
+.DS_Store
+
+# Editor/IDE
+.vscode/
+.idea/
