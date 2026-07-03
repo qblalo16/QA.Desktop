@@ -46,7 +46,7 @@ def _env_bool(name: str, default: bool) -> bool:
 
 @dataclass
 class Settings:
-    api_base_url: str = field(default_factory=lambda: os.getenv("API_BASE_URL", "http://localhost:8000/api/v1"))
+    api_base_url: str = field(default_factory=lambda: os.getenv("API_BASE_URL", "https://iaopt-atm-testing-services-dev.azurewebsites.net/api/v1"))
 
     # Azure OpenAI configuration
     openai_api_key: str = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))

@@ -26,10 +26,30 @@ chmod +x build-macos-arm64-dmg.sh
 ./build-macos-arm64-dmg.sh
 ```
 
+## Generar DMG para macOS Intel (x64)
+```bash
+cd desktop-runner
+chmod +x build-macos-x64-dmg.sh
+./build-macos-x64-dmg.sh
+```
+
+## Cambiar icono de la aplicacion (macOS)
+1. Guarda tu imagen (png/jpg) en `desktop-runner/assets/`.
+2. Genera el `.icns`:
+
+```bash
+cd desktop-runner
+chmod +x make-macos-icon.sh
+./make-macos-icon.sh assets/app-icon.png
+```
+
+El archivo resultante debe quedar en `assets/app-icon.icns`. Los scripts de build lo detectan automaticamente.
+
 Salida esperada:
 - App: `dist/AI QA Desktop Runner.app`
 - DMG: `dist/AI-QA-Desktop-Runner-arm64.dmg`
+- DMG (Intel): `dist/AI-QA-Desktop-Runner-x64.dmg`
 
 Notas:
-- El script instala `pyinstaller` y embebe Chromium de Playwright para la app.
+- El script instala `pyinstaller` y prepara Chromium en cache de usuario de Playwright (no embebido en el bundle).
 - Para distribuir fuera de tu máquina puede requerirse firmado/notarización de Apple.
