@@ -1,8 +1,10 @@
 import asyncio
+import os
 import sys
+from pathlib import Path
 
 from PySide6.QtCore import Qt, QThread, Signal
-from PySide6.QtGui import QIntValidator
+from PySide6.QtGui import QIcon, QIntValidator
 from PySide6.QtWidgets import (
     QApplication,
     QHBoxLayout,
@@ -22,6 +24,18 @@ from api_client import ApiClient
 from auto_healing import AutoHealingEngine
 from config import settings
 from playwright_runner import PlaywrightExecutionEngine
+
+
+def resource_path(relative_path: str) -> str:
+    base_path = getattr(sys, '_MEIPASS', Path(__file__).resolve().parent)
+    return str(Path(base_path) / relative_path)
+
+
+def app_icon() -> QIcon:
+    icon = QIcon(resource_path('assets/app-icon.ico'))
+    if not icon.isNull():
+        return icon
+    return QIcon(resource_path('assets/app-icon.png'))
 
 
 class AsyncWorker(QThread):
@@ -73,6 +87,7 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("AI QA Desktop Runner")
+        self.setWindowIcon(app_icon())
         self.resize(1280, 800)
 
         self.api = ApiClient()
@@ -484,6 +499,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setWindowIcon(app_icon())
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

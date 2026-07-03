@@ -19,6 +19,15 @@ pip install -r requirements.txt
 bash run.sh
 ```
 
+## Generar .exe unico para Windows
+```powershell
+.\build-windows-exe.ps1
+```
+
+Salida esperada:
+- EXE: `dist/AI-QA-Desktop-Runner.exe`
+- Icono: `assets/app-icon.ico` generado desde `assets/app-icon.png`
+
 ## Generar DMG para macOS (Apple Silicon / ARM64)
 ```bash
 cd desktop-runner

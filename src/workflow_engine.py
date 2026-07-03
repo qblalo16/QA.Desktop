@@ -777,7 +777,7 @@ class FillFormNodeExecutor(NodeExecutor):
     async def _collect_visible_button_texts(self, page: Page) -> list[str]:
         try:
             values = await page.evaluate(
-                """
+                r"""
                 () => {
                     const compact = (text) => (text || '').replace(/\s+/g, ' ').trim();
                     const isVisible = (el) => {
@@ -804,7 +804,7 @@ class FillFormNodeExecutor(NodeExecutor):
         limpiando atributos de ruido para reducir tokens en el prompt.
         """
         try:
-            result = await page.evaluate("""
+            result = await page.evaluate(r"""
             () => {
                 const KEEP_ATTRS = new Set([
                     'id','name','for','type','role','aria-label','aria-labelledby',
@@ -903,7 +903,7 @@ class FillFormNodeExecutor(NodeExecutor):
         """Fallback: captura listboxes visibles ya renderizados en DOM."""
         try:
             entries = await page.evaluate(
-                """
+                r"""
                 () => {
                     const KEEP_ATTRS = new Set([
                         'id','name','for','type','role','aria-label','aria-labelledby',
@@ -964,7 +964,7 @@ class FillFormNodeExecutor(NodeExecutor):
 
     async def _capture_native_select_catalog_entries(self, page: Page) -> list[dict[str, str]]:
         try:
-            entries = await page.evaluate("""
+            entries = await page.evaluate(r"""
             () => {
                 const form = document.querySelector('form');
                 if (!form) return [];
@@ -1045,7 +1045,7 @@ class FillFormNodeExecutor(NodeExecutor):
         for index in range(1, max_iterations + 1):
             try:
                 metadata = await page.evaluate(
-                    """
+                    r"""
                     (processed) => {
                         document.querySelectorAll('[data-aiqa-active-candidate]').forEach((el) => {
                             el.removeAttribute('data-aiqa-active-candidate');
@@ -1236,7 +1236,7 @@ class FillFormNodeExecutor(NodeExecutor):
 
             try:
                catalog_html = await page.evaluate(
-                    """
+                    r"""
                     ({comboLabel, listboxId, labelledBy}) => {
                         const KEEP_ATTRS = new Set([
                             'id','name','for','type','role','aria-label','aria-labelledby',
@@ -1419,7 +1419,7 @@ class FillFormNodeExecutor(NodeExecutor):
                         el.removeAttribute('data-aiqa-active-candidate');
                     });
                 }
-                """
+                        """
             )
         except Exception:
             pass
@@ -1485,7 +1485,7 @@ class FillFormNodeExecutor(NodeExecutor):
         """
         try:
             entries = await page.evaluate(
-                """
+                r"""
                 () => {
                     const compact = (text) => (text || '').replace(/\s+/g, ' ').trim();
                     const isVisible = (el) => {
@@ -1990,7 +1990,7 @@ class ValidationNodeExecutor(NodeExecutor):
     async def _read_page_text(self, page: Page) -> str:
         try:
             return await page.evaluate(
-                """
+                r"""
                 () => {
                     const body = document.body;
                     if (!body) return '';
